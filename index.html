@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    window.onload = function() {
+      const username = "leonardogriguolo";
+
+      // apre app Instagram
+      window.location.href = "instagram://user?username=" + username;
+
+      // fallback
+      setTimeout(function(){
+        window.location.href = "https://www.instagram.com/" + username + "/";
+      }, 1200);
+    }
+  </script>
+</head>
+<body></body>
+</html>
