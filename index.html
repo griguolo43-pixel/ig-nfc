@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Apri Instagram</title>
+
   <style>
     body{
       margin:0;
@@ -15,37 +16,74 @@
       background:#fff;
       text-align:center;
     }
+
     .box{
       width:100%;
       max-width:360px;
       padding:24px;
     }
-    .btn{
-      display:block;
+
+    .ig-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
       width:100%;
       padding:20px;
-      border-radius:16px;
-      background:#d62976;
+      border-radius:20px;
+      background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
       color:#fff;
-      text-decoration:none;
-      font-size:20px;
+      font-size:18px;
       font-weight:bold;
       border:none;
       cursor:pointer;
+      box-shadow:0 8px 22px rgba(214,41,118,0.35);
+      transition:all 0.15s ease;
     }
-    .small{
-      display:inline-block;
-      margin-top:14px;
-      color:#d62976;
-      text-decoration:none;
-      font-size:14px;
+
+    .ig-btn:active{
+      transform:scale(0.96);
+    }
+
+    .ig-logo{
+      width:22px;
+      height:22px;
+      border:2px solid #fff;
+      border-radius:6px;
+      position:relative;
+    }
+
+    .ig-logo::after{
+      content:"";
+      position:absolute;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#fff;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    .ig-user{
+      margin-top:12px;
+      font-size:15px;
+      color:#555;
+      font-weight:bold;
     }
   </style>
 </head>
+
 <body>
   <div class="box">
-    <button class="btn" id="openBtn">Apri Instagram</button>
-    <a class="small" id="webLink" href="https://www.instagram.com/ovrtm.overtime/">Apri versione web</a>
+
+    <button class="ig-btn" id="openBtn">
+      <div class="ig-logo"></div>
+      Segui su Instagram
+    </button>
+
+    <div class="ig-user">@ovrtm.overtime</div>
+
   </div>
 
   <script>
@@ -61,8 +99,6 @@
 
     const webUrl = "https://www.instagram.com/" + username + "/";
     const androidIntent = "intent://www.instagram.com/" + username + "/#Intent;package=com.instagram.android;scheme=https;end";
-
-    document.getElementById("webLink").href = webUrl;
 
     function detectBrowser(ua) {
       if (/Instagram/i.test(ua)) return "Instagram In-App Browser";
@@ -139,6 +175,7 @@
       }
     }
 
+    // parte subito il tracking
     trackScan();
 
     document.getElementById("openBtn").addEventListener("click", function () {
