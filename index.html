@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Apri Instagram</title>
   <style>
+    *{
+      box-sizing:border-box;
+    }
+
     body{
       margin:0;
       min-height:100vh;
@@ -12,74 +16,214 @@
       align-items:center;
       justify-content:center;
       font-family:Arial,sans-serif;
-      background:#fff;
-      text-align:center;
+      background:
+        radial-gradient(circle at top left, #feda75 0%, transparent 30%),
+        radial-gradient(circle at top right, #fa7e1e 0%, transparent 28%),
+        radial-gradient(circle at bottom left, #d62976 0%, transparent 30%),
+        radial-gradient(circle at bottom right, #962fbf 0%, transparent 32%),
+        linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+      padding:20px;
     }
+
     .box{
       width:100%;
-      max-width:340px;
-      padding:24px;
+      max-width:390px;
+      padding:28px 22px;
+      border-radius:28px;
+      background:rgba(255,255,255,0.96);
+      box-shadow:0 18px 45px rgba(0,0,0,0.18);
+      text-align:center;
+      backdrop-filter:blur(10px);
     }
-    .btn{
-      display:block;
+
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      margin-bottom:14px;
+      background:linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+      box-shadow:0 8px 20px rgba(214,41,118,0.28);
+    }
+
+    .logo svg{
+      width:28px;
+      height:28px;
+      fill:#fff;
+    }
+
+    .profile{
+      margin:8px 0 22px;
+    }
+
+    .avatar-wrap{
+      width:102px;
+      height:102px;
+      margin:0 auto 14px;
+      padding:4px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+    }
+
+    .avatar{
       width:100%;
-      padding:18px;
-      border-radius:14px;
-      background:#d62976;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+      border:4px solid #fff;
+      background:#f3f3f3;
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+      color:#1f1f1f;
+      letter-spacing:-0.4px;
+    }
+
+    .handle{
+      margin-top:6px;
+      font-size:16px;
+      color:#6b7280;
+      font-weight:600;
+    }
+
+    .desc{
+      margin:14px auto 0;
+      max-width:280px;
+      font-size:14px;
+      line-height:1.45;
+      color:#444;
+    }
+
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      padding:17px 20px;
+      border:none;
+      border-radius:18px;
+      background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af,#515bd4);
       color:#fff;
       text-decoration:none;
       font-size:18px;
-      font-weight:bold;
-      border:none;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 12px 26px rgba(131,52,175,0.28);
+      transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
     }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 16px 30px rgba(131,52,175,0.34);
+    }
+
+    .btn:active{
+      transform:scale(0.985);
+    }
+
+    .btn svg{
+      width:22px;
+      height:22px;
+      fill:#fff;
+      flex:0 0 auto;
+    }
+
     .small{
       display:inline-block;
       margin-top:14px;
       color:#d62976;
       text-decoration:none;
       font-size:14px;
+      font-weight:700;
+    }
+
+    .small:hover{
+      text-decoration:underline;
+    }
+
+    .note{
+      margin-top:16px;
+      font-size:12px;
+      color:#8a8a8a;
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <button class="btn" id="openBtn">Apri Instagram</button>
-    <a class="small" id="webLink" href="https://www.instagram.com/leonardogriguolo/">Apri versione web</a>
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm8.9 2.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5Z"/>
+      </svg>
+    </div>
+
+    <div class="profile">
+      <div class="avatar-wrap">
+        <img
+          class="avatar"
+          src="https://unavatar.io/instagram/ovrtm.overtime"
+          alt="Profilo Instagram ovrtm.overtime"
+        >
+      </div>
+
+      <h1>OVRTM</h1>
+      <div class="handle">@ovrtm.overtime</div>
+      <div class="desc">
+        Tocca il pulsante qui sotto per aprire subito il profilo Instagram.
+      </div>
+    </div>
+
+    <button class="btn" id="openBtn">
+      <svg viewBox="0 0 24 24">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm8.9 2.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5Z"/>
+      </svg>
+      Apri Instagram
+    </button>
+
+    <a class="small" id="webLink" href="https://www.instagram.com/ovrtm.overtime/">
+      Apri versione web
+    </a>
+
+    <div class="note">ovrtm.overtime</div>
   </div>
 
   <script>
-    const username = "leonardogriguolo";
-    const trackingBase = "https://script.google.com/macros/s/AKfycbypTDhZFdOEPSZDjLPO81R9DAi-Zk02hnH-xjJB3eABTciO0YGl_ONBa4NU4HrKh8Yw/exec";
+    const username = "ovrtm.overtime";
+    const trackingUrl = "https://script.google.com/macros/s/AKfycbwQDgmNs0Z8f0HCwiexa4vDAR0Yxtr9uYIcFRfX-Dnzkju_B8YkG7jOzqazaFXE-Z8X/exec";
     const ua = navigator.userAgent || "";
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
+    const isAndroid = /Android/i.test(ua);
     const webUrl = "https://www.instagram.com/" + username + "/";
-    const iosUrl = "instagram://user?username=" + username;
     const androidIntent = "intent://www.instagram.com/" + username + "/#Intent;package=com.instagram.android;scheme=https;end";
 
     document.getElementById("webLink").href = webUrl;
 
-    // tracking rapido
-    const trackUrl =
-      trackingBase +
-      "?src=nfc&ua=" + encodeURIComponent(ua) +
-      "&t=" + Date.now();
+    const data = {
+      src: "nfc",
+      ua: ua,
+      t: Date.now()
+    };
 
-    // uso immagine invisibile: spesso più affidabile e veloce di fetch in questo caso
-    const img = new Image();
-    img.src = trackUrl;
+    if (navigator.sendBeacon) {
+      const blob = new Blob([JSON.stringify(data)], { type: "text/plain;charset=UTF-8" });
+      navigator.sendBeacon(trackingUrl, blob);
+    } else {
+      fetch(trackingUrl, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body: JSON.stringify(data),
+        keepalive: true
+      }).catch(() => {});
+    }
 
-    const btn = document.getElementById("openBtn");
-
-    btn.addEventListener("click", function () {
+    document.getElementById("openBtn").addEventListener("click", function () {
       if (isAndroid) {
         window.location.href = androidIntent;
-        setTimeout(function () {
-          window.location.href = webUrl;
-        }, 1200);
-      } else if (isIOS) {
-        window.location.href = iosUrl;
         setTimeout(function () {
           window.location.href = webUrl;
         }, 1200);
@@ -87,11 +231,6 @@
         window.location.href = webUrl;
       }
     });
-
-    // tentativo automatico rapido
-    setTimeout(function () {
-      btn.click();
-    }, 250);
   </script>
 </body>
 </html>
