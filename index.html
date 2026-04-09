@@ -8,81 +8,97 @@
   <style>
     body{
       margin:0;
-      min-height:100vh;
+      height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-family:Arial,sans-serif;
-      background:#fff;
-      text-align:center;
-    }
-
-    .box{
-      width:100%;
-      max-width:360px;
-      padding:24px;
-    }
-
-    .ig-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      width:100%;
-      padding:20px;
-      border-radius:20px;
-      background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+      background:#0f0f0f;
+      font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
       color:#fff;
-      font-size:18px;
-      font-weight:bold;
-      border:none;
-      cursor:pointer;
-      box-shadow:0 8px 22px rgba(214,41,118,0.35);
-      transition:all 0.15s ease;
     }
 
-    .ig-btn:active{
+    .modal{
+      width:90%;
+      max-width:340px;
+      background:#1c1c1e;
+      border-radius:20px;
+      padding:28px 22px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .logo{
+      width:90px;
+      height:90px;
+      margin:0 auto 20px;
+      border-radius:50%;
+      background:linear-gradient(145deg,#7b2cff,#a259ff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:22px;
+    }
+
+    .title{
+      font-size:22px;
+      font-weight:bold;
+      margin-bottom:10px;
+    }
+
+    .subtitle{
+      font-size:14px;
+      color:#aaa;
+      margin-bottom:22px;
+      line-height:1.4;
+    }
+
+    .btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#3d5afe;
+      color:#fff;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .btn:active{
       transform:scale(0.96);
     }
 
-    .ig-logo{
-      width:22px;
-      height:22px;
-      border:2px solid #fff;
-      border-radius:6px;
-      position:relative;
-    }
-
-    .ig-logo::after{
-      content:"";
-      position:absolute;
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:#fff;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-    }
-
-    .ig-user{
-      margin-top:12px;
-      font-size:15px;
-      color:#555;
-      font-weight:bold;
+    .secondary{
+      margin-top:14px;
+      font-size:14px;
+      color:#aaa;
     }
   </style>
 </head>
 
 <body>
-  <div class="box">
 
-    <button class="ig-btn" id="openBtn">
-      <div class="ig-logo"></div>
-      Segui su Instagram
+  <div class="modal">
+
+    <div class="logo">OVRTM</div>
+
+    <div class="title">
+      Vedi il profilo completo nell'app
+    </div>
+
+    <div class="subtitle">
+      Usa l'app per vedere altro su<br>
+      <b>ovrtm.overtime</b>
+    </div>
+
+    <button class="btn" id="openBtn">
+      Apri Instagram
     </button>
 
-    <div class="ig-user">@ovrtm.overtime</div>
+    <div class="secondary">
+      Iscriviti
+    </div>
 
   </div>
 
@@ -101,66 +117,21 @@
     const androidIntent = "intent://www.instagram.com/" + username + "/#Intent;package=com.instagram.android;scheme=https;end";
 
     function detectBrowser(ua) {
-      if (/Instagram/i.test(ua)) return "Instagram In-App Browser";
-      if (/Chrome/i.test(ua) && !/Edg/i.test(ua)) return "Chrome";
-      if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) return "Safari";
-      if (/Edg/i.test(ua)) return "Edge";
-      if (/Firefox/i.test(ua)) return "Firefox";
-      return "Sconosciuto";
-    }
-
-    async function collectDeviceInfo() {
-      let platform = "";
-      let mobile = "";
-      let model = "";
-      const browser = detectBrowser(ua);
-
-      if (navigator.userAgentData) {
-        try {
-          const high = await navigator.userAgentData.getHighEntropyValues([
-            "platform",
-            "model",
-            "mobile"
-          ]);
-          platform = high.platform || "";
-          mobile = String(high.mobile ?? "");
-          model = high.model || "";
-        } catch (e) {}
-      }
-
-      if (!platform) {
-        if (/Android/i.test(ua)) platform = "Android";
-        else if (/iPhone|iPad|iPod/i.test(ua)) platform = "iOS";
-        else if (/Windows/i.test(ua)) platform = "Windows";
-        else if (/Mac/i.test(ua)) platform = "macOS";
-        else platform = "Sconosciuto";
-      }
-
-      if (!mobile) {
-        mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) ? "TRUE" : "FALSE";
-      } else {
-        mobile = mobile === "true" || mobile === true ? "TRUE" : "FALSE";
-      }
-
-      if (!model) {
-        if (/iPhone/i.test(ua)) model = "iPhone";
-        else if (/iPad/i.test(ua)) model = "iPad";
-        else if (/Android/i.test(ua)) model = "Android Device";
-      }
-
-      return {
-        src: "nfc",
-        tag: tagId,
-        ua,
-        browser,
-        platform,
-        mobile,
-        model
-      };
+      if (/Chrome/i.test(ua)) return "Chrome";
+      if (/Safari/i.test(ua)) return "Safari";
+      return "Altro";
     }
 
     async function trackScan() {
-      const data = await collectDeviceInfo();
+      const data = {
+        src: "nfc",
+        tag: tagId,
+        ua: ua,
+        browser: detectBrowser(ua),
+        platform: isAndroid ? "Android" : isIOS ? "iOS" : "Other",
+        mobile: "TRUE",
+        model: isIOS ? "iPhone" : "Android"
+      };
 
       if (navigator.sendBeacon) {
         const blob = new Blob([JSON.stringify(data)], { type: "text/plain;charset=UTF-8" });
@@ -175,7 +146,6 @@
       }
     }
 
-    // parte subito il tracking
     trackScan();
 
     document.getElementById("openBtn").addEventListener("click", function () {
@@ -189,5 +159,6 @@
       }
     });
   </script>
+
 </body>
 </html>
